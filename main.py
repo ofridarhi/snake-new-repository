@@ -5,7 +5,7 @@ import time
 BLACK = (0,0,0)
 WHITE = (255,255,255)
 GREEN = (0,255,0)
-FPS = 60
+FPS = 120
 
 WIDTH, HEIGHT = 800,800
 SQUARE_SIZE = WIDTH // 10
@@ -25,7 +25,7 @@ class Board():
                 pygame.draw.rect(WIN,BLACK,(row *SQUARE_SIZE,col * SQUARE_SIZE, SQUARE_SIZE,SQUARE_SIZE),PADDING)
 
 class Snake:
-    def __init__(self,x,y,color,width,height,):
+    def __init__(self,x,y,color,width,height):
         self.x = x
         self.y = y
         self.x_vel = SQUARE_SIZE
@@ -40,20 +40,21 @@ class Snake:
         pygame.display.update()
 
     def move_snake_head(self):
-        time.sleep(0.5)
+        time.sleep(0.3)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             pygame.draw.rect(WIN, WHITE, (self.x, self.y, self.width, self.height))
             self.y -= self.y_vel
-        if keys[pygame.K_DOWN]:
+        elif keys[pygame.K_DOWN]:
             pygame.draw.rect(WIN, WHITE, (self.x, self.y, self.width, self.height))
             self.y += self.y_vel
-        if keys[pygame.K_LEFT]:
+        elif keys[pygame.K_LEFT]:
             pygame.draw.rect(WIN, WHITE, (self.x, self.y, self.width, self.height))
             self.x -= self.x_vel
-        if keys[pygame.K_RIGHT]:
+        elif keys[pygame.K_RIGHT]:
             pygame.draw.rect(WIN, WHITE, (self.x, self.y, self.width, self.height))
             self.x += self.x_vel
+        pygame.draw.rect(WIN, self.color, (self.x, self.y, self.width, self.height))
         pygame.display.update()
 
 
