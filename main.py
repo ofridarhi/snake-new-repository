@@ -3,12 +3,14 @@ import numpy
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
+GREEN = (0,255,0)
 FPS = 60
 
 WIDTH, HEIGHT = 800,800
 SQUARE_SIZE = WIDTH // 10
 ROWS = WIDTH // SQUARE_SIZE
 COLS = HEIGHT // SQUARE_SIZE
+PADDING = 2
 
 WIN = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("snake")
@@ -19,16 +21,31 @@ class Board():
         WIN.fill(WHITE)
         for row in range(ROWS):
             for col in range(COLS):
-                pygame.draw.rect(WIN,BLACK,(row *SQUARE_SIZE,col * SQUARE_SIZE, SQUARE_SIZE,SQUARE_SIZE),2)
+                pygame.draw.rect(WIN,BLACK,(row *SQUARE_SIZE,col * SQUARE_SIZE, SQUARE_SIZE,SQUARE_SIZE),PADDING)
 
+class Snake:
+    def __init__(self,x,y,color,width,height,):
+        self.x = x
+        self.y = y
+        self.x_vel = SQUARE_SIZE
+        self.y_vel = SQUARE_SIZE
+        self.color = color
+        self.width = width
+        self.height = height
+        self.squars = []
+
+    def create_snake_head(self):
+        pygame.draw.rect(WIN,self.color,(self.x,self.y,self.width,self.height))
+        pygame.display.update()
 
 
 def main():
-
+    snake = Snake(SQUARE_SIZE * 5 +PADDING, SQUARE_SIZE * 5 +PADDING,GREEN,SQUARE_SIZE -PADDING*2,SQUARE_SIZE -PADDING*2)
     board = Board()
     run = True
     clock = pygame.time.Clock()
     board.create_board()
+    snake.create_snake_head()
     while run:
         clock.tick(FPS)
         pygame.display.update()
