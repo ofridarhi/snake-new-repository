@@ -57,6 +57,7 @@ class Snake:
         pygame.draw.rect(WIN, self.color, (self.x, self.y, self.width, self.height))
         pygame.display.update()
 
+
 def main():
     snake = Snake(SQUARE_SIZE * 5 +PADDING, SQUARE_SIZE * 5 +PADDING,GREEN,SQUARE_SIZE -PADDING*2,SQUARE_SIZE -PADDING*2)
     board = Board()
