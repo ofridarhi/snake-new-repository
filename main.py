@@ -5,6 +5,7 @@ import time
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
+
 FPS = 120
 
 WIDTH, HEIGHT = 800, 800
@@ -58,9 +59,14 @@ class Snake:
             snake_cells.append(new_cell)
         self.snake_cells = snake_cells
 
-    def draw(self,board):
-        board.clear_board()
+    def delete_last(self):
+        last_snake_cell = self.snake_cells[-1]
+        pygame.draw.rect(WIN, WHITE, (last_snake_cell[0], last_snake_cell[1], self.width, self.height))
+
+    def draw(self):
+        self.delete_last()
         self.update_snake()
+
         for cell_x, cell_y in self.snake_cells:
             pygame.draw.rect(WIN, self.color, (cell_x, cell_y, self.width, self.height))
         pygame.display.update()
@@ -93,7 +99,7 @@ def main():
     while run:
         clock.tick(FPS)
         snake.change_snake_direction()
-        snake.draw(board)
+        snake.draw()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
