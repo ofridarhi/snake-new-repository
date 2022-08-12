@@ -25,9 +25,9 @@ DIRECTION_DICT['down'] = (0, 1)
 
 class Board:
     def __init__(self):
-        self.create_board()
+        self.clear_board()
 
-    def create_board(self):
+    def clear_board(self):
         WIN.fill(WHITE)
         for row in range(ROWS):
             for col in range(COLS):
@@ -58,7 +58,8 @@ class Snake:
             snake_cells.append(new_cell)
         self.snake_cells = snake_cells
 
-    def draw(self):
+    def draw(self,board):
+        board.clear_board()
         self.update_snake()
         for cell_x, cell_y in self.snake_cells:
             pygame.draw.rect(WIN, self.color, (cell_x, cell_y, self.width, self.height))
@@ -92,7 +93,7 @@ def main():
     while run:
         clock.tick(FPS)
         snake.change_snake_direction()
-        snake.draw()
+        snake.draw(board)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
